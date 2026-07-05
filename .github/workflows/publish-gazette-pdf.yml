@@ -35,9 +35,9 @@ jobs:
           path: dist/pdf/*.pdf
 
       - name: Email latest PDF
-        if: ${{ secrets.RESEND_API_KEY != '' && secrets.ODYSSEY_TO_EMAIL != '' && secrets.ODYSSEY_FROM_EMAIL != '' }}
+        if: ${{ secrets.GMAIL_USER != '' && secrets.GMAIL_APP_PASSWORD != '' && secrets.ODYSSEY_TO_EMAIL != '' }}
         env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           ODYSSEY_TO_EMAIL: ${{ secrets.ODYSSEY_TO_EMAIL }}
-          ODYSSEY_FROM_EMAIL: ${{ secrets.ODYSSEY_FROM_EMAIL }}
         run: npm run send:latest

@@ -38,16 +38,16 @@ The repo includes a GitHub Actions workflow for PDF email delivery:
 Required GitHub Secrets:
 
 ```text
-RESEND_API_KEY
+GMAIL_USER
+GMAIL_APP_PASSWORD
 ODYSSEY_TO_EMAIL
-ODYSSEY_FROM_EMAIL
 ```
 
 ## What Codex Can Do In The Background
 
 Codex can create the next issue on a schedule inside this repo. GitHub Actions can turn that issue into a PDF and email it.
 
-Codex cannot send to your phone until a delivery channel is configured. For email, this repo is prepared for Resend through GitHub Secrets.
+Codex cannot send to your phone until a delivery channel is configured. For email, this repo is prepared for Gmail SMTP through GitHub Secrets.
 
 ## Suggested Next Issues
 

@@ -1,7 +1,8 @@
 import { readFile, readdir } from 'node:fs/promises'
 import path from 'node:path'
+import nodemailer from 'nodemailer'
 
-const requiredEnv = ['RESEND_API_KEY', 'ODYSSEY_TO_EMAIL', 'ODYSSEY_FROM_EMAIL']
+const requiredEnv = ['GMAIL_USER', 'GMAIL_APP_PASSWORD', 'ODYSSEY_TO_EMAIL']
 const missing = requiredEnv.filter((name) => !process.env[name])
 
 if (missing.length > 0) {
@@ -21,35 +22,32 @@ if (pdfFiles.length === 0) {
 const latestPdf = pdfFiles.at(-1)
 const pdfPath = path.join(pdfDir, latestPdf)
 const pdfBytes = await readFile(pdfPath)
-const attachment = pdfBytes.toString('base64')
 const issueTitle = latestPdf.replace(/\.pdf$/, '').replaceAll('-', ' ')
 
-const response = await fetch('https://api.resend.com/emails', {
-  method: 'POST',
-  headers: {
-    Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-    'Content-Type': 'application/json',
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD,
   },
-  body: JSON.stringify({
-    from: process.env.ODYSSEY_FROM_EMAIL,
-    to: [process.env.ODYSSEY_TO_EMAIL],
-    subject: `Backend Odyssey Gazette: ${issueTitle}`,
-    html: `
-      <h1>Backend Odyssey Gazette</h1>
-      <p>Your latest backend newspaper is attached as a PDF.</p>
-      <p>Read it on your phone when you have a quiet pocket of time.</p>
-    `,
-    attachments: [
-      {
-        filename: latestPdf,
-        content: attachment,
-      },
-    ],
-  }),
 })
 
-if (!response.ok) {
-  throw new Error(`Email failed: ${response.status} ${await response.text()}`)
-}
+await transporter.sendMail({
+  from: `"Backend Odyssey Gazette" <${process.env.GMAIL_USER}>`,
+  to: process.env.ODYSSEY_TO_EMAIL,
+  subject: `Backend Odyssey Gazette: ${issueTitle}`,
+  html: `
+    <h1>Backend Odyssey Gazette</h1>
+    <p>Your latest backend newspaper is attached as a PDF.</p>
+    <p>Read it on your phone when you have a quiet pocket of time.</p>
+  `,
+  attachments: [
+    {
+      filename: latestPdf,
+      content: pdfBytes,
+      contentType: 'application/pdf',
+    },
+  ],
+})
 
 console.log(`Sent ${latestPdf} to ${process.env.ODYSSEY_TO_EMAIL}`)

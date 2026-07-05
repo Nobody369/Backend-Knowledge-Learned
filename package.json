@@ -7,6 +7,7 @@
     "send:latest": "node scripts/send-latest-issue-email.mjs"
   },
   "dependencies": {
-    "fastify": "^5.4.0"
+    "fastify": "^5.4.0",
+    "nodemailer": "^9.0.3"
   }
 }
