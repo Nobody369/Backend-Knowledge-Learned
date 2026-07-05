@@ -13,6 +13,9 @@ Rules:
 - Every technology must be explained as a response to a problem.
 - Include Mystery, Why, History, Mechanism, Trade-off, Lab, Real World, Boss Challenge, Test, Score, and Knowledge Map.
 - Update `topics/` with one folder per topic learned that day.
+- Create both a Markdown issue under `issues/` and a newspaper-style HTML issue under `docs/issues/`.
+- Reuse `docs/styles/newspaper.css` for the visual style.
+- Update `docs/index.html` so the new issue appears on the front page.
 - Update `README.md` current issue links when useful.
 - Do not overwrite existing issues.
 

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Backend Odyssey Gazette 001</title>
+    <link rel="stylesheet" href="../styles/newspaper.css">
+  </head>
+  <body>
+    <main class="paper">
+      <header class="masthead">
+        <p class="kicker">Backend Odyssey Gazette - Issue 001</p>
+        <h1>The HTTP Mystery</h1>
+        <div class="dateline">
+          <span>Reading time: 30-45 min</span>
+          <span>Topic: HTTP Message</span>
+          <span>Result: Test yourself</span>
+        </div>
+      </header>
+
+      <section class="headline">
+        <h2>Why does HTTP exist if TCP already sends bytes?</h2>
+        <p class="subtitle">今天的核心不是背定义，而是抓住一个问题：字节到了以后，另一台电脑怎么知道这些字节代表什么？</p>
+      </section>
+
+      <section class="front-grid">
+        <article class="lead">
+          <p>Imagine a world with no HTTP. Your browser connects to a server. The server sends back a stream of bytes. Now what? Are those bytes HTML, JSON, an image, an error, a redirect, or a login result?</p>
+          <p>TCP can carry the bytes, but TCP does not explain the message. HTTP exists because browsers and servers needed a shared format. It gives meaning to the byte stream.</p>
+          <p>Every technology exists because of a problem. HTTP exists because the Web needed a common language between clients and servers.</p>
+        </article>
+
+        <aside class="sidebar">
+          <div class="box">
+            <h3>Today's Answer</h3>
+            <p>TCP solves transport. HTTP solves meaning.</p>
+          </div>
+          <div class="box">
+            <h3>Look For</h3>
+            <ul>
+              <li>Method</li>
+              <li>Path</li>
+              <li>Headers</li>
+              <li>Status code</li>
+              <li>Body</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+
+      <section class="columns">
+        <article class="section">
+          <h3>Why</h3>
+          <p>HTTP answers questions TCP does not answer: what action is requested, which resource is targeted, what metadata is attached, whether the request succeeded, and what kind of content came back.</p>
+          <p>Without HTTP, every website could invent its own private format. Browsers, proxies, API clients, CDNs, and debugging tools would lose a common foundation.</p>
+        </article>
+
+        <article class="section">
+          <h3>History</h3>
+          <p>HTTP was born with the early World Wide Web. Its first job was simple: let a client ask for a document and let a server return it.</p>
+          <p>The Web grew because many different machines could agree on a small readable protocol. A boring shared standard unlocked a huge ecosystem.</p>
+        </article>
+
+        <article class="section">
+          <h3>Trade-off</h3>
+          <p>HTTP is not always the best protocol. Real-time two-way communication may use WebSocket. Internal high-performance service calls may use gRPC. Custom systems may use raw TCP.</p>
+          <p>HTTP wins when you need a general, readable, widely supported agreement.</p>
+        </article>
+      </section>
+
+      <section class="lab">
+        <div class="lab-grid">
+          <article class="section">
+            <h3>Mechanism</h3>
+            <pre><code>Browser
+  |
+  | HTTP Request
+  v
+Server
+  |
+  | HTTP Response
+  v
+Browser</code></pre>
+            <p>A request contains method, path, headers, and optional body. A response contains status code, headers, and body.</p>
+          </article>
+
+          <article class="section">
+            <h3>Lab</h3>
+            <pre><code>npm start
+curl -i http://localhost:3000/hello
+curl -i http://localhost:3000/users/1
+curl -i http://localhost:3000/users/999</code></pre>
+            <p>The point is to see HTTP happening: status line, headers, body, and resource path.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="challenge">
+        <article class="challenge-card">
+          <h3>Boss Challenge</h3>
+          <p>PM asks for an order system: view all orders, view one order, create an order, update shipping address, and cancel an order.</p>
+          <p>Design the REST API. Explain method, path, success status code, and not-found behavior.</p>
+        </article>
+
+        <article class="section">
+          <h3>Test</h3>
+          <ol class="test-list">
+            <li>What problem does HTTP solve that TCP does not solve?</li>
+            <li>Is <code>POST /orders/123/delete</code> good REST design? Explain.</li>
+            <li>A server receives bytes over TCP. Why might it still need HTTP headers?</li>
+            <li>Design an Order API for list, read, create, address update, and cancel.</li>
+            <li>HTTP is stateless. How can a website keep a user logged in?</li>
+          </ol>
+        </article>
+      </section>
+
+      <section class="map">
+        <article class="section">
+          <h3>Knowledge Map Update</h3>
+          <pre><code>Backend World
+
+Internet
+└── HTTP
+    ├── Request
+    │   ├── Method
+    │   ├── Path
+    │   ├── Headers
+    │   └── Body
+    ├── Response
+    │   ├── Status Code
+    │   ├── Headers
+    │   └── Body
+    ├── REST
+    │   ├── GET
+    │   ├── POST
+    │   ├── PUT
+    │   ├── PATCH
+    │   └── DELETE
+    └── Stateless
+        ├── Cookie
+        ├── Session
+        └── Token</code></pre>
+        </article>
+      </section>
+
+      <p class="footer-note">Next issue: Why is HTTP stateless, but websites can keep you logged in?</p>
+    </main>
+  </body>
+</html>

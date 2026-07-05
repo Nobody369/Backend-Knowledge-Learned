@@ -20,6 +20,19 @@ publishing/  Notes for scheduled generation and phone delivery.
 ## Current Issue
 
 - [001: Why Does HTTP Exist?](issues/001-why-http-exists.md)
+- Newspaper web edition: `docs/issues/001-why-http-exists.html`
+
+## Phone Reading
+
+The repo includes a newspaper-style web edition under `docs/`.
+
+To read it on your phone through GitHub Pages:
+
+1. Open the repo on GitHub.
+2. Go to `Settings` -> `Pages`.
+3. Set source to `Deploy from a branch`.
+4. Choose branch `main` and folder `/docs`.
+5. Open the published Pages URL on your phone.
 
 ## Local API
 
