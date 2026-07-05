@@ -2,7 +2,9 @@
   "type": "module",
   "scripts": {
     "start": "node server.mjs",
-    "check": "node --check server.mjs"
+    "check": "node --check server.mjs",
+    "build:pdf": "node scripts/build-pdf.mjs",
+    "send:latest": "node scripts/send-latest-issue-email.mjs"
   },
   "dependencies": {
     "fastify": "^5.4.0"

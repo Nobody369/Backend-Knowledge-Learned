@@ -25,15 +25,29 @@ The automation should:
 
 Start simple:
 
-1. Email yourself the Markdown or HTML issue.
+1. Email yourself the PDF issue.
 2. Read it from your phone email app.
 3. Later, connect Telegram, Pushover, or another notification channel.
 
+The repo includes a GitHub Actions workflow for PDF email delivery:
+
+```text
+.github/workflows/publish-gazette-pdf.yml
+```
+
+Required GitHub Secrets:
+
+```text
+RESEND_API_KEY
+ODYSSEY_TO_EMAIL
+ODYSSEY_FROM_EMAIL
+```
+
 ## What Codex Can Do In The Background
 
-Codex can create the next issue on a schedule inside this repo.
+Codex can create the next issue on a schedule inside this repo. GitHub Actions can turn that issue into a PDF and email it.
 
-Codex cannot magically send to your phone until a delivery channel is configured. For email, that usually means adding SMTP credentials or using a provider such as SendGrid, Resend, or Gmail app password through GitHub Secrets.
+Codex cannot send to your phone until a delivery channel is configured. For email, this repo is prepared for Resend through GitHub Secrets.
 
 ## Suggested Next Issues
 

@@ -24,7 +24,10 @@ publishing/  Notes for scheduled generation and phone delivery.
 
 ## Phone Reading
 
-The repo includes a newspaper-style web edition under `docs/`.
+The repo includes two reading formats:
+
+- Newspaper web edition under `docs/`
+- Phone-delivery PDF generated under `dist/pdf/`
 
 To read it on your phone through GitHub Pages:
 
@@ -33,6 +36,18 @@ To read it on your phone through GitHub Pages:
 3. Set source to `Deploy from a branch`.
 4. Choose branch `main` and folder `/docs`.
 5. Open the published Pages URL on your phone.
+
+To receive issues without clicking around, use the PDF email workflow:
+
+1. Create a free Resend account or another email provider.
+2. In GitHub, go to `Settings` -> `Secrets and variables` -> `Actions`.
+3. Add these repository secrets:
+   - `RESEND_API_KEY`
+   - `ODYSSEY_TO_EMAIL`
+   - `ODYSSEY_FROM_EMAIL`
+4. Run the `Publish Backend Odyssey Gazette PDF` workflow manually once.
+
+The workflow builds the latest newspaper issue as a PDF and emails it as an attachment.
 
 ## Local API
 

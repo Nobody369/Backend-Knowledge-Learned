@@ -16,6 +16,7 @@ Rules:
 - Create both a Markdown issue under `issues/` and a newspaper-style HTML issue under `docs/issues/`.
 - Reuse `docs/styles/newspaper.css` for the visual style.
 - Update `docs/index.html` so the new issue appears on the front page.
+- Keep the HTML printable as PDF with `npm run build:pdf`.
 - Update `README.md` current issue links when useful.
 - Do not overwrite existing issues.
 
