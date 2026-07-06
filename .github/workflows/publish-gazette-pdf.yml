@@ -8,6 +8,10 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      GMAIL_USER: ${{ secrets.GMAIL_USER }}
+      GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+      ODYSSEY_TO_EMAIL: ${{ secrets.ODYSSEY_TO_EMAIL }}
 
     steps:
       - name: Checkout
@@ -35,9 +39,5 @@ jobs:
           path: dist/pdf/*.pdf
 
       - name: Email latest PDF
-        if: ${{ secrets.GMAIL_USER != '' && secrets.GMAIL_APP_PASSWORD != '' && secrets.ODYSSEY_TO_EMAIL != '' }}
-        env:
-          GMAIL_USER: ${{ secrets.GMAIL_USER }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-          ODYSSEY_TO_EMAIL: ${{ secrets.ODYSSEY_TO_EMAIL }}
+        if: ${{ env.GMAIL_USER != '' && env.GMAIL_APP_PASSWORD != '' && env.ODYSSEY_TO_EMAIL != '' }}
         run: npm run send:latest
